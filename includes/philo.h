@@ -1,24 +1,55 @@
 /*
-** philo.h for philosophe in /home/jibb/rendu/PSU_2014_philo
+m** philo.h for philosophe in /home/jibb/rendu/PSU_2014_philo
 ** 
 ** Made by Jean-Baptiste Grégoire
 ** Login   <jibb@epitech.net>
 ** 
 ** Started on  Wed Feb 25 10:21:52 2015 Jean-Baptiste Grégoire
-** Last update Wed Feb 25 10:27:19 2015 Jean-Baptiste Grégoire
+** Last update Wed Feb 25 16:04:10 2015 Jean-Baptiste Grégoire
 */
 
 #ifndef PHILOSOPHE_H_
 # define PHILOSOPHE_H_
 
 # include <pthread.h>
-# include <stddef.h>
+# include <stdint.h>
+# include <stdlib.h>
+# include <stdio.h>
+# include <strings.h>
+# include <unistd.h>
+# include <string.h>
+# include <curses.h>
 
-typedef struct	s_philo
+# define NUMBER_PHILO	7 // attention à la modification de cet maccro
+# define CYCLE_EAT	1
+# define CYCLE_THINK	1
+# define NUMBER_CYCLE	150
+
+enum	e_state
+  {
+    SLEEP = 0,
+    THINK,
+    EAT
+  };
+
+enum	e_stick
+  {
+    FREE = 0,
+    USED
+  };
+
+typedef struct s_philo	t_philo;
+
+struct		s_philo
 {
   int		id;
-  int8_t	left_stick;
-  int8_t	right_stick;
-}		t_philo;
+  int		rice;
+  enum e_state	state;
+  int8_t	stick;
+  t_philo	*left_philo;
+  t_philo	*right_philo;
+};
+
+void		*start_philo(void *philos);
 
 #endif /* PHILOSOPHE_H_ */

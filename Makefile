@@ -5,10 +5,11 @@
 ## Login   <prenat_h@epitech.eu>
 ## 
 ## Started on  Wed Feb 25 10:17:02 2015 Hugo Prenat
-## Last update Wed Feb 25 10:18:12 2015 Hugo Prenat
+## Last update Wed Feb 25 15:49:01 2015 Jean-Baptiste Grégoire
 ##
 
-SRC		=
+SRC		=	src/main.c	\
+			src/philo.c
 
 OBJ		=	$(SRC:.c=.o)
 
@@ -31,7 +32,7 @@ else
 endif
 
 $(NAME):	$(OBJ)
-	$(CC) -o $(NAME) $(OBJ)
+	$(CC) -o $(NAME) $(OBJ) -lpthread -lncurses
 
 all:		$(NAME)
 
