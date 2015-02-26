@@ -1,11 +1,11 @@
 /*
 ** philo.c for philosophe in /home/jibb/rendu
-** 
+**
 ** Made by Jean-Baptiste Grégoire
 ** Login   <jibb@epitech.net>
-** 
+**
 ** Started on  Wed Feb 25 10:18:39 2015 Jean-Baptiste Grégoire
-** Last update Wed Feb 25 16:33:32 2015 Jean-Baptiste Grégoire
+** Last update Thu Feb 26 14:57:51 2015 Hugo Prenat
 */
 
 #include "philo.h"
@@ -52,18 +52,14 @@ pthread_mutex_t	disp = PTHREAD_MUTEX_INITIALIZER;
 
 void			display(t_philo *philo)
 {
-  char			*state;
-
   pthread_mutex_lock(&disp);
   if (philo->state == SLEEP)
-    state = strdup("sleep");
+    mvprintw(philo->id - 1, 0, "ID: %d état : sleep\n", philo->id);
   else if (philo->state == EAT)
-    state = strdup("eat");
+    mvprintw(philo->id - 1, 0, "ID: %d état : eat\n", philo->id);
   else
-    state = strdup("think");
-  mvprintw(philo->id, 0, "ID: %d état : %s\n", philo->id, state);
+    mvprintw(philo->id - 1, 0, "ID: %d état : think\n", philo->id);
   refresh();
-  free(state);
   pthread_mutex_unlock(&disp);
 }
 
@@ -72,7 +68,7 @@ void			*start_philo(void *philos)
 {
   t_philo		*philo;
   pthread_mutex_t	stick;
-  
+
   philo = (t_philo *)(philos);
   pthread_mutex_init(&stick, NULL);
   init_mutex(philo, &stick);
