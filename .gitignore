@@ -2,8 +2,6 @@
 
 *.o
 
-a.out
+*.out
 
-*.so
-
-tab.c
+philo
