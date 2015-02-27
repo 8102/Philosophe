@@ -1,11 +1,11 @@
 /*
 m** philo.h for philosophe in /home/jibb/rendu/PSU_2014_philo
-** 
+**
 ** Made by Jean-Baptiste Grégoire
 ** Login   <jibb@epitech.net>
-** 
+**
 ** Started on  Wed Feb 25 10:21:52 2015 Jean-Baptiste Grégoire
-** Last update Wed Feb 25 16:04:10 2015 Jean-Baptiste Grégoire
+** Last update Thu Feb 26 16:54:53 2015 Hugo Prenat
 */
 
 #ifndef PHILOSOPHE_H_
@@ -23,7 +23,7 @@ m** philo.h for philosophe in /home/jibb/rendu/PSU_2014_philo
 # define NUMBER_PHILO	7 // attention à la modification de cet maccro
 # define CYCLE_EAT	1
 # define CYCLE_THINK	1
-# define NUMBER_CYCLE	150
+# define NUMBER_CYCLE	1500
 
 enum	e_state
   {

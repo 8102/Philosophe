@@ -5,17 +5,23 @@
 ** Login   <jibb@epitech.net>
 **
 ** Started on  Wed Feb 25 10:18:39 2015 Jean-Baptiste Grégoire
-** Last update Thu Feb 26 14:57:51 2015 Hugo Prenat
+** Last update Thu Feb 26 17:49:12 2015 Hugo Prenat
 */
 
 #include "philo.h"
 
+pthread_mutex_t	disp = PTHREAD_MUTEX_INITIALIZER;
+
 void	change_to_eat(t_philo *philo, pthread_mutex_t *stick)
 {
   pthread_mutex_lock(stick);
+  if (philo->right_philo->stick == USED && philo->right_philo->state == EAT)
+    return ;
   philo->stick = USED;
   philo->right_philo->stick = USED;
   philo->state = EAT;
+  philo->rice -= 1;
+  sleep(CYCLE_EAT);
 }
 
 void	change_to_sleep(t_philo *philo, pthread_mutex_t *stick)
@@ -31,6 +37,7 @@ void	change_to_think(t_philo *philo, pthread_mutex_t *stick)
   pthread_mutex_lock(stick);
   philo->right_philo->stick = USED;
   philo->state = THINK;
+  sleep(CYCLE_THINK);
 }
 
 void			init_mutex(t_philo *philo, pthread_mutex_t *stick)
@@ -38,7 +45,7 @@ void			init_mutex(t_philo *philo, pthread_mutex_t *stick)
   if (philo->state == THINK)
     {
       pthread_mutex_lock(stick);
-      philo->right_philo->stick = USED;
+      philo->stick = USED;
     }
   else if (philo->state == EAT)
     {
@@ -48,11 +55,11 @@ void			init_mutex(t_philo *philo, pthread_mutex_t *stick)
     }
 }
 
-pthread_mutex_t	disp = PTHREAD_MUTEX_INITIALIZER;
-
 void			display(t_philo *philo)
 {
   pthread_mutex_lock(&disp);
+  move(philo->id - 1, 0);
+  clrtoeol();
   if (philo->state == SLEEP)
     mvprintw(philo->id - 1, 0, "ID: %d état : sleep\n", philo->id);
   else if (philo->state == EAT)
@@ -81,9 +88,7 @@ void			*start_philo(void *philos)
 	change_to_sleep(philo, &stick);
       else
 	change_to_think(philo, &stick);
-      philo->rice -= 1;
       display(philo);
-      sleep(1);
     }
   return ((void *)(0));
 }
