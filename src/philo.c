@@ -5,7 +5,7 @@
 ** Login   <jibb@epitech.net>
 **
 ** Started on  Wed Feb 25 10:18:39 2015 Jean-Baptiste Grégoire
-** Last update Sat Feb 28 00:06:46 2015 Jean-Baptiste Grégoire
+** Last update Sat Feb 28 00:15:31 2015 Jean-Baptiste Grégoire
 */
 
 #include "window.h"
@@ -62,10 +62,10 @@ void			*start_philo(void *philos)
 	change_to_sleep(philo);
       else
 	change_to_think(philo);
-      /* pthread_mutex_lock(&disp);       */
-      /* window_display(philo); */
-      /* pthread_mutex_unlock(&disp); */
-      display(philo);
+      pthread_mutex_lock(&disp);
+      window_display(philo);
+      pthread_mutex_unlock(&disp);
+      /* display(philo); */
     }
   return ((void *)(0));
 }
