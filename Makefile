@@ -5,11 +5,12 @@
 ## Login   <prenat_h@epitech.eu>
 ## 
 ## Started on  Wed Feb 25 10:17:02 2015 Hugo Prenat
-## Last update Wed Feb 25 15:49:01 2015 Jean-Baptiste Grégoire
+## Last update Fri Feb 27 19:39:00 2015 Jean-Baptiste Grégoire
 ##
 
 SRC		=	src/main.c	\
-			src/philo.c
+			src/philo.c	\
+			bonus/window_init.c
 
 OBJ		=	$(SRC:.c=.o)
 
@@ -23,7 +24,7 @@ DEBUG		=	yes
 
 INCLUDE 	=	includes/
 
-CFLAGS		=	-W -Wall -Wextra -Werror -I $(INCLUDE)
+CFLAGS		=	-W -Wall -Wextra -I $(INCLUDE)
 
 ifeq ($(DEBUG),yes)
 	CFLAGS 	+= -g3
@@ -32,7 +33,7 @@ else
 endif
 
 $(NAME):	$(OBJ)
-	$(CC) -o $(NAME) $(OBJ) -lpthread -lncurses
+	$(CC) -o $(NAME) $(OBJ) -lpthread -lncurses `sdl-config --cflags --libs` -lSDL_image
 
 all:		$(NAME)
 

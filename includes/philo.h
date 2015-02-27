@@ -5,7 +5,7 @@ m** philo.h for philosophe in /home/jibb/rendu/PSU_2014_philo
 ** Login   <jibb@epitech.net>
 **
 ** Started on  Wed Feb 25 10:21:52 2015 Jean-Baptiste Grégoire
-** Last update Thu Feb 26 16:54:53 2015 Hugo Prenat
+** Last update Fri Feb 27 23:40:28 2015 Jean-Baptiste Grégoire
 */
 
 #ifndef PHILOSOPHE_H_

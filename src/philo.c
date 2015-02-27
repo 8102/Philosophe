@@ -5,10 +5,10 @@
 ** Login   <jibb@epitech.net>
 **
 ** Started on  Wed Feb 25 10:18:39 2015 Jean-Baptiste Grégoire
-** Last update Thu Feb 26 17:49:12 2015 Hugo Prenat
+** Last update Fri Feb 27 23:40:57 2015 Jean-Baptiste Grégoire
 */
 
-#include "philo.h"
+#include "window.h"
 
 pthread_mutex_t	disp = PTHREAD_MUTEX_INITIALIZER;
 
@@ -21,7 +21,7 @@ void	change_to_eat(t_philo *philo, pthread_mutex_t *stick)
   philo->right_philo->stick = USED;
   philo->state = EAT;
   philo->rice -= 1;
-  sleep(CYCLE_EAT);
+  /* sleep(CYCLE_EAT); */
 }
 
 void	change_to_sleep(t_philo *philo, pthread_mutex_t *stick)
@@ -37,7 +37,7 @@ void	change_to_think(t_philo *philo, pthread_mutex_t *stick)
   pthread_mutex_lock(stick);
   philo->right_philo->stick = USED;
   philo->state = THINK;
-  sleep(CYCLE_THINK);
+  /* sleep(CYCLE_THINK); */
 }
 
 void			init_mutex(t_philo *philo, pthread_mutex_t *stick)
@@ -88,7 +88,9 @@ void			*start_philo(void *philos)
 	change_to_sleep(philo, &stick);
       else
 	change_to_think(philo, &stick);
-      display(philo);
+      pthread_mutex_lock(&disp);
+      window_display(philo);      
+      pthread_mutex_unlock(&disp);
     }
   return ((void *)(0));
 }
