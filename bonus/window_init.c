@@ -5,7 +5,7 @@
 ** Login   <jibb@epitech.net>
 ** 
 ** Started on  Fri Feb 27 17:04:28 2015 Jean-Baptiste Grégoire
-** Last update Sat Feb 28 00:16:23 2015 Jean-Baptiste Grégoire
+** Last update Sat Feb 28 17:59:13 2015 Jean-Baptiste Grégoire
 */
 
 #include "window.h"
@@ -31,11 +31,11 @@ void		window_display(t_philo *philo)
   SDL_Rect	pos;
 
   screen = window_init(1);
-  pos.x = philo->id * 150;
+  pos.x = philo->id * 165 - 100;
   pos.y = 350;
   tmp = SDL_CreateRGBSurface(SDL_HWSURFACE, 150, 100, 32, 0, 0, 0, 0);
   if (philo->state == SLEEP)
-    SDL_FillRect(tmp, NULL, SDL_MapRGB(screen->format, 255, 0, 0));
+    SDL_FillRect(tmp, NULL, SDL_MapRGB(screen->format, 255, 255, 255));
   else if (philo->state == EAT)
     SDL_FillRect(tmp, NULL, SDL_MapRGB(screen->format, 0, 255, 0));
   else
@@ -56,14 +56,11 @@ SDL_Surface		*window_init(int flag)
       fprintf(stderr, "SDL initialisation error\n");
       return ((SDL_Surface *)(-1));
     }
-  if ((screen = SDL_SetVideoMode(WIN_X, WIN_Y, 32, SDL_HWSURFACE)) == NULL)
+  screen = SDL_SetVideoMode(WIN_X, WIN_Y, 32, SDL_HWSURFACE);
+  background = IMG_Load("bonus/img/background.jpg");
+  if (!screen || !background)
     {
       fprintf(stderr, "Error: can't create the window\n");
-      return ((SDL_Surface *)(-1));
-    }
-  if ((background = IMG_Load("bonus/img/background.jpg")) == NULL)
-    {
-      fprintf(stderr, "Error: can't load background image\n");
       return ((SDL_Surface *)(-1));
     }
   SDL_WM_SetCaption("Les philosophes", NULL);
