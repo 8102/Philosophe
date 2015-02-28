@@ -5,7 +5,7 @@
 ** Login   <jibb@epitech.net>
 **
 ** Started on  Wed Feb 25 10:18:39 2015 Jean-Baptiste Grégoire
-** Last update Sat Feb 28 00:15:31 2015 Jean-Baptiste Grégoire
+** Last update Sat Feb 28 18:52:29 2015 Jean-Baptiste Grégoire
 */
 
 #include "window.h"
@@ -54,7 +54,7 @@ void			*start_philo(void *philos)
   t_philo		*philo;
 
   philo = (t_philo *)(philos);
-  while (philo->rice > 0)
+  while (philo->rice > 0 && philo->is_good)
     {
       if (philo->state == THINK)
 	change_to_eat(philo);
