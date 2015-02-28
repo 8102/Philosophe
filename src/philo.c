@@ -5,7 +5,7 @@
 ** Login   <jibb@epitech.net>
 **
 ** Started on  Wed Feb 25 10:18:39 2015 Jean-Baptiste Grégoire
-** Last update Sat Feb 28 00:15:31 2015 Jean-Baptiste Grégoire
+** Last update Sat Feb 28 18:09:34 2015 Hugo Prenat
 */
 
 #include "window.h"
@@ -56,7 +56,7 @@ void			*start_philo(void *philos)
   philo = (t_philo *)(philos);
   while (philo->rice > 0)
     {
-      if (philo->state == THINK)
+      if (philo->state == THINK || philo->state == SLEEP)
 	change_to_eat(philo);
       else if (philo->state == EAT)
 	change_to_sleep(philo);
