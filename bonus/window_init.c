@@ -1,35 +1,39 @@
 /*
 ** window_init.c for Philosophes in /home/jibb/rendu/PSU_2014_philo/bonus
-** 
+**
 ** Made by Jean-Baptiste Grégoire
 ** Login   <jibb@epitech.net>
-** 
+**
 ** Started on  Fri Feb 27 17:04:28 2015 Jean-Baptiste Grégoire
-** Last update Sat Feb 28 21:25:38 2015 Jean-Baptiste Grégoire
+** Last update Sun Mar  1 02:57:42 2015 Jean-Baptiste Grégoire
 */
 
 #include "window.h"
 
-void		*window_handle(void *p)
+void			*window_handle(void *p)
 {
-  SDL_Event	event;
-  char		good;
-  int		i;
-  t_philo	**philos;
-  
+  SDL_Event		event;
+  char			good;
+  int			i;
+  t_philo		*philos;
+  pthread_mutex_t	m;
+
   good = 1;
   i = 0;
-  philos = (t_philo **)(p);
+  philos = (t_philo *)(p);
+  pthread_mutex_init(&m, NULL);
   while (good)
     {
       SDL_WaitEvent(&event);
       if (event.type == SDL_QUIT)
 	{
+	  pthread_mutex_lock(&m);
 	  while (i < NUMBER_PHILO)
 	    {
-	      (*philos)[i].is_good = 0;
+	      philos[i].is_good = 0;
 	      i++;
 	    }
+	  pthread_mutex_unlock(&m);
 	  good = 0;
 	}
     }
@@ -43,7 +47,7 @@ void			window_display(t_philo *philo)
   static SDL_Surface	*think;
   SDL_Surface		*screen;
   SDL_Rect		pos;
-  
+
   screen = window_init(1);
   pos.x = philo->id * 180 - 170;
   pos.y = 350;

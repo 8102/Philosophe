@@ -5,7 +5,7 @@
 ** Login   <jibb@epitech.net>
 **
 ** Started on  Wed Feb 25 10:18:50 2015 Jean-Baptiste Grégoire
-** Last update Sat Feb 28 19:19:24 2015 Jean-Baptiste Grégoire
+** Last update Sun Mar  1 02:57:47 2015 Jean-Baptiste Grégoire
 */
 
 #include "window.h"
