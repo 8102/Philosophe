@@ -5,7 +5,7 @@
 ** Login   <jibb@epitech.net>
 **
 ** Started on  Wed Feb 25 10:18:39 2015 Jean-Baptiste Grégoire
-** Last update Sat Feb 28 22:09:28 2015 Hugo Prenat
+** Last update Sun Mar  1 13:56:56 2015 Hugo Prenat
 */
 
 #include "window.h"
@@ -15,7 +15,8 @@ pthread_mutex_t	disp = PTHREAD_MUTEX_INITIALIZER;
 void	change_to_eat(t_philo *philo)
 {
   pthread_mutex_lock(&philo->stick);
-  pthread_mutex_lock(&philo->right_philo->stick);
+  if (pthread_mutex_trylock(&philo->right_philo->stick))
+    return ;
   philo->state = EAT;
   philo->rice -= 1;
   sleep(CYCLE_EAT);
@@ -30,7 +31,7 @@ void	change_to_sleep(t_philo *philo)
 
 void	change_to_think(t_philo *philo)
 {
-  pthread_mutex_trylock(&philo->stick);
+  pthread_mutex_lock(&philo->stick);
   philo->state = THINK;
   sleep(CYCLE_THINK);
   pthread_mutex_unlock(&philo->stick);
@@ -56,12 +57,12 @@ void			*start_philo(void *philos)
   philo = (t_philo *)(philos);
   while (philo->rice > 0 && philo->is_good)
     {
-      if (philo->state == THINK/* || philo->state == SLEEP*/)
-	change_to_eat(philo);
-      else if (philo->state == EAT)
+      if (philo->state == EAT)
 	change_to_sleep(philo);
-      else
+      else if (philo->state == SLEEP)
 	change_to_think(philo);
+      else
+	change_to_eat(philo);
       display(philo);
     }
   return ((void *)(0));
