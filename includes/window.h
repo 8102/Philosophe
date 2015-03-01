@@ -5,7 +5,7 @@
 ** Login   <jibb@epitech.net>
 **
 ** Started on  Fri Feb 27 17:14:11 2015 Jean-Baptiste Grégoire
-** Last update Sun Mar  1 13:26:08 2015 Jean-Baptiste Grégoire
+** Last update Sun Mar  1 14:56:57 2015 Jean-Baptiste Grégoire
 */
 
 #ifndef WINDOW_H_
@@ -18,9 +18,17 @@
 # include <SDL/SDL_image.h>
 # include "philo.h"
 
-void		*window_handle(void *p);
+typedef struct	s_img
+{
+  SDL_Surface	*eat;
+  SDL_Surface	*sleep_img;
+  SDL_Surface	*think;
+}		t_img;
+
+void		display_philo(t_philo *philo, t_img *imgs, SDL_Surface *screen);
 void		window_destroy();
 void		*window_display(void *p);
+void		*window_handle(void *p);
 SDL_Surface	*window_init(int flag);
 
 #endif /* WINDOW_H_ */

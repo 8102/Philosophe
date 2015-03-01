@@ -5,7 +5,7 @@
 ** Login   <jibb@epitech.net>
 **
 ** Started on  Fri Feb 27 17:04:28 2015 Jean-Baptiste Grégoire
-** Last update Sun Mar  1 13:53:35 2015 Jean-Baptiste Grégoire
+** Last update Sun Mar  1 14:59:59 2015 Jean-Baptiste Grégoire
 */
 
 #include "window.h"
@@ -37,39 +37,36 @@ void			*window_handle(void *p)
   return (NULL);
 }
 
+int			load_imgs(t_img *s)
+{
+  s->eat = IMG_Load("bonus/img/eat.png");
+  s->sleep_img = IMG_Load("bonus/img/sleep.png");
+  s->think = IMG_Load("bonus/img/think.png");
+  if (!(s->eat) || !(s->sleep_img) || !(s->think))
+    {
+      fprintf(stderr, "Error: Can't load image !\n");
+      return (-1);
+    }
+  return (0);
+}
+
 void			*window_display(void *p)
 {
-  static SDL_Surface	*eat;
-  static SDL_Surface	*sleep_img;
-  static SDL_Surface	*think;
+  t_img			imgs;
   SDL_Surface		*screen;
-  SDL_Rect		pos;
   int			i;
   t_philo		*philo;
 
+  if (load_imgs(&imgs) == -1)
+    return ((void *)(-1));
   screen = window_init(1);
-  pos.y = 350;
   philo = (t_philo *)(p);
-  eat = IMG_Load("bonus/img/eat.png");
-  sleep_img = IMG_Load("bonus/img/sleep.png");
-  think = IMG_Load("bonus/img/think.png");
-  if (!eat || !sleep_img || !think)
-    {
-      fprintf(stderr, "Error: Can't load image !\n");
-      return (NULL);
-    }
   while (philo[0].is_good)
     {
       i = 0;
       while (i < NUMBER_PHILO)
 	{
-	  pos.x = philo[i].id * 180 - 170;
-	  if (philo[i].state == SLEEP)
-	    SDL_BlitSurface(sleep_img, NULL, screen, &pos);
-	  else if (philo[i].state == EAT)
-	    SDL_BlitSurface(eat, NULL, screen, &pos);
-	  else
-	    SDL_BlitSurface(think, NULL, screen, &pos);
+	  display_philo(&philo[i], &imgs, screen);
 	  i++;
 	}
       SDL_Flip(screen);
