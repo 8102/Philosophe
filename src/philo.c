@@ -5,7 +5,7 @@
 ** Login   <jibb@epitech.net>
 **
 ** Started on  Wed Feb 25 10:18:39 2015 Jean-Baptiste Grégoire
-** Last update Sun Mar  1 13:56:56 2015 Hugo Prenat
+** Last update Sun Mar  1 13:58:46 2015 Hugo Prenat
 */
 
 #include "window.h"
@@ -16,7 +16,10 @@ void	change_to_eat(t_philo *philo)
 {
   pthread_mutex_lock(&philo->stick);
   if (pthread_mutex_trylock(&philo->right_philo->stick))
-    return ;
+    {
+      pthread_mutex_unlock(&philo->stick);
+      return ;
+    }
   philo->state = EAT;
   philo->rice -= 1;
   sleep(CYCLE_EAT);
