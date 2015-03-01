@@ -5,7 +5,7 @@
 ** Login   <jibb@epitech.net>
 **
 ** Started on  Wed Feb 25 10:18:50 2015 Jean-Baptiste Grégoire
-** Last update Sun Mar  1 12:00:01 2015 Hugo Prenat
+** Last update Sun Mar  1 12:09:37 2015 Hugo Prenat
 */
 
 #include "window.h"
@@ -38,6 +38,7 @@ void		init_philo()
       pthread_join(threads[i], &ret);
       i++;
     }
+  pthread_join(threads[i + 1], &ret);
 }
 
 int		run_philo()

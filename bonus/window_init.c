@@ -5,7 +5,7 @@
 ** Login   <jibb@epitech.net>
 **
 ** Started on  Fri Feb 27 17:04:28 2015 Jean-Baptiste Grégoire
-** Last update Sun Mar  1 11:59:45 2015 Hugo Prenat
+** Last update Sun Mar  1 12:10:33 2015 Hugo Prenat
 */
 
 #include "window.h"
@@ -64,23 +64,18 @@ void			window_display(void *p)
   while (1)
     {
       i = 0;
-      while (i < NUMBER_PHILO)
+      while (i < NUMBER_PHILO || philo[i].is_good)
 	{
-	  pos.x = (*philo)[i].id * 180 - 170;
-	  if ((*philo)[i].state == SLEEP)
+	  pos.x = philo[i].id * 180 - 170;
+	  if (philo[i].state == SLEEP)
 	    SDL_BlitSurface(sleep_img, NULL, screen, &pos);
-	  else if ((*philo)[i].state == EAT)
-	    {
-	      SDL_BlitSurface(eat, NULL, screen, &pos);
-	      sleep(CYCLE_EAT);
-	    }
+	  else if (philo[i].state == EAT)
+	    SDL_BlitSurface(eat, NULL, screen, &pos);
 	  else
-	    {
-	      SDL_BlitSurface(think, NULL, screen, &pos);
-	      sleep(CYCLE_THINK);
-	    }
+	    SDL_BlitSurface(think, NULL, screen, &pos);
 	  i++;
 	}
+      return ;
     }
   SDL_Flip(screen);
 }
