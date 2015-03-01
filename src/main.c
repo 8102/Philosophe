@@ -5,7 +5,7 @@
 ** Login   <jibb@epitech.net>
 **
 ** Started on  Wed Feb 25 10:18:50 2015 Jean-Baptiste Grégoire
-** Last update Sat Feb 28 22:23:33 2015 Hugo Prenat
+** Last update Sun Mar  1 12:00:01 2015 Hugo Prenat
 */
 
 #include "window.h"

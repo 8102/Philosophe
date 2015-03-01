@@ -5,31 +5,35 @@
 ** Login   <jibb@epitech.net>
 **
 ** Started on  Fri Feb 27 17:04:28 2015 Jean-Baptiste Grégoire
-** Last update Sat Feb 28 22:37:32 2015 Hugo Prenat
+** Last update Sun Mar  1 11:59:45 2015 Hugo Prenat
 */
 
 #include "window.h"
 
-void		*window_handle(void *p)
+void			*window_handle(void *p)
 {
-  SDL_Event	event;
-  char		good;
-  int		i;
-  t_philo	**philos;
+  SDL_Event		event;
+  char			good;
+  int			i;
+  t_philo		*philos;
+  pthread_mutex_t	m;
 
   good = 1;
   i = 0;
-  philos = (t_philo **)(p);
+  philos = (t_philo *)(p);
+  pthread_mutex_init(&m, NULL);
   while (good)
     {
       SDL_WaitEvent(&event);
       if (event.type == SDL_QUIT)
 	{
+	  pthread_mutex_lock(&m);
 	  while (i < NUMBER_PHILO)
 	    {
-	      (*philos)[i].is_good = 0;
+	      philos[i].is_good = 0;
 	      i++;
 	    }
+	  pthread_mutex_unlock(&m);
 	  good = 0;
 	}
     }
@@ -44,11 +48,11 @@ void			window_display(void *p)
   SDL_Surface		*screen;
   SDL_Rect		pos;
   int			i;
-  t_philo		**philo;
+  t_philo		*philo;
 
   screen = window_init(1);
   pos.y = 350;
-  philo = (t_philo **)(p);
+  philo = (t_philo *)(p);
   eat = IMG_Load("bonus/img/eat.png");
   sleep_img = IMG_Load("bonus/img/sleep.png");
   think = IMG_Load("bonus/img/think.png");
