@@ -5,7 +5,7 @@
 ** Login   <jibb@epitech.net>
 **
 ** Started on  Wed Feb 25 10:18:50 2015 Jean-Baptiste Grégoire
-** Last update Sun Mar  1 18:17:29 2015 Jean-Baptiste Grégoire
+** Last update Sun Mar  1 21:47:33 2015 Jean-Baptiste Grégoire
 */
 
 #include "window.h"
@@ -40,7 +40,8 @@ void		init_philo()
 
 int		run_philo()
 {
-  window_init(0);
+  if (window_init(0) == (void *)(-1))
+    return (-1);
   init_philo();
   window_destroy();
   return (0);
