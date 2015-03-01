@@ -1,11 +1,11 @@
 /*
 ** window_init.c for Philosophes in /home/jibb/rendu/PSU_2014_philo/bonus
-** 
+**
 ** Made by Jean-Baptiste Grégoire
 ** Login   <jibb@epitech.net>
-** 
+**
 ** Started on  Fri Feb 27 17:04:28 2015 Jean-Baptiste Grégoire
-** Last update Sat Feb 28 21:25:38 2015 Jean-Baptiste Grégoire
+** Last update Sat Feb 28 22:37:32 2015 Hugo Prenat
 */
 
 #include "window.h"
@@ -16,7 +16,7 @@ void		*window_handle(void *p)
   char		good;
   int		i;
   t_philo	**philos;
-  
+
   good = 1;
   i = 0;
   philos = (t_philo **)(p);
@@ -36,31 +36,48 @@ void		*window_handle(void *p)
   return (NULL);
 }
 
-void			window_display(t_philo *philo)
+void			window_display(void *p)
 {
   static SDL_Surface	*eat;
-  static SDL_Surface	*sleep;
+  static SDL_Surface	*sleep_img;
   static SDL_Surface	*think;
   SDL_Surface		*screen;
   SDL_Rect		pos;
-  
+  int			i;
+  t_philo		**philo;
+
   screen = window_init(1);
-  pos.x = philo->id * 180 - 170;
   pos.y = 350;
+  philo = (t_philo **)(p);
   eat = IMG_Load("bonus/img/eat.png");
-  sleep = IMG_Load("bonus/img/sleep.png");
+  sleep_img = IMG_Load("bonus/img/sleep.png");
   think = IMG_Load("bonus/img/think.png");
-  if (!eat || !sleep || !think)
+  if (!eat || !sleep_img || !think)
     {
       fprintf(stderr, "Error: Can't load image !\n");
       return ;
     }
-  if (philo->state == SLEEP)
-    SDL_BlitSurface(sleep, NULL, screen, &pos);
-  else if (philo->state == EAT)
-    SDL_BlitSurface(eat, NULL, screen, &pos);
-  else
-    SDL_BlitSurface(think, NULL, screen, &pos);
+  while (1)
+    {
+      i = 0;
+      while (i < NUMBER_PHILO)
+	{
+	  pos.x = (*philo)[i].id * 180 - 170;
+	  if ((*philo)[i].state == SLEEP)
+	    SDL_BlitSurface(sleep_img, NULL, screen, &pos);
+	  else if ((*philo)[i].state == EAT)
+	    {
+	      SDL_BlitSurface(eat, NULL, screen, &pos);
+	      sleep(CYCLE_EAT);
+	    }
+	  else
+	    {
+	      SDL_BlitSurface(think, NULL, screen, &pos);
+	      sleep(CYCLE_THINK);
+	    }
+	  i++;
+	}
+    }
   SDL_Flip(screen);
 }
 

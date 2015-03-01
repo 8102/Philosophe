@@ -1,11 +1,11 @@
 /*
 ** window.h for philosophe in /home/jibb/rendu/PSU_2014_philo/bonus
-** 
+**
 ** Made by Jean-Baptiste Grégoire
 ** Login   <jibb@epitech.net>
-** 
+**
 ** Started on  Fri Feb 27 17:14:11 2015 Jean-Baptiste Grégoire
-** Last update Sat Feb 28 19:11:41 2015 Jean-Baptiste Grégoire
+** Last update Sat Feb 28 22:21:46 2015 Hugo Prenat
 */
 
 #ifndef WINDOW_H_
@@ -20,7 +20,7 @@
 
 void		*window_handle(void *p);
 void		window_destroy();
-void		window_display(t_philo *philo);
+void		window_display(void *p);
 SDL_Surface	*window_init(int flag);
 
 #endif /* WINDOW_H_ */
