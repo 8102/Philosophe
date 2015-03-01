@@ -5,7 +5,7 @@
 ** Login   <jibb@epitech.net>
 ** 
 ** Started on  Fri Feb 27 17:14:11 2015 Jean-Baptiste Grégoire
-** Last update Fri Feb 27 23:40:02 2015 Jean-Baptiste Grégoire
+** Last update Sat Feb 28 19:11:41 2015 Jean-Baptiste Grégoire
 */
 
 #ifndef WINDOW_H_
@@ -18,7 +18,7 @@
 # include <SDL/SDL_image.h>
 # include "philo.h"
 
-void		window_handle();
+void		*window_handle(void *p);
 void		window_destroy();
 void		window_display(t_philo *philo);
 SDL_Surface	*window_init(int flag);

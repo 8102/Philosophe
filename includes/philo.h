@@ -5,7 +5,7 @@ m** philo.h for philosophe in /home/jibb/rendu/PSU_2014_philo
 ** Login   <jibb@epitech.net>
 **
 ** Started on  Wed Feb 25 10:21:52 2015 Jean-Baptiste Grégoire
-** Last update Sat Feb 28 00:00:17 2015 Jean-Baptiste Grégoire
+** Last update Sat Feb 28 18:46:04 2015 Jean-Baptiste Grégoire
 */
 
 #ifndef PHILOSOPHE_H_
@@ -46,6 +46,7 @@ struct			s_philo
   pthread_mutex_t	stick;
   t_philo		*left_philo;
   t_philo		*right_philo;
+  char			is_good;
 };
 
 void		*start_philo(void *philos);

@@ -5,7 +5,7 @@
 ** Login   <jibb@epitech.net>
 **
 ** Started on  Wed Feb 25 10:18:50 2015 Jean-Baptiste Grégoire
-** Last update Sat Feb 28 00:01:11 2015 Jean-Baptiste Grégoire
+** Last update Sat Feb 28 19:19:24 2015 Jean-Baptiste Grégoire
 */
 
 #include "window.h"
@@ -14,13 +14,14 @@ void		init_philo()
 {
   t_philo	philos[NUMBER_PHILO];
   pthread_t	threads[NUMBER_PHILO];
+  pthread_t	event;
   int		i;
-  void *ret;
+  void		*ret;
 
   i = 0;
-  window_init(0);
   while (i < NUMBER_PHILO)
     {
+      philos[i].is_good = 1;
       philos[i].id = i + 1;
       philos[i].rice = NUMBER_CYCLE;
       pthread_mutex_init(&philos[i].stick, NULL);
@@ -30,19 +31,20 @@ void		init_philo()
       pthread_create(&threads[i], NULL, &start_philo, &philos[i]);
       i++;
     }
+  pthread_create(&event, NULL, &window_handle, (void *)(&philos));
   i = 0;
   while (i < NUMBER_PHILO)
     {
       pthread_join(threads[i], &ret);
       i++;
     }
-  window_handle();
-  window_destroy();
 }
 
 int		run_philo()
 {
+  window_init(0);
   init_philo();
+  window_destroy();
   return (0);
 }
 

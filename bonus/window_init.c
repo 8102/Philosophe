@@ -5,42 +5,62 @@
 ** Login   <jibb@epitech.net>
 ** 
 ** Started on  Fri Feb 27 17:04:28 2015 Jean-Baptiste Grégoire
-** Last update Sat Feb 28 17:59:13 2015 Jean-Baptiste Grégoire
+** Last update Sat Feb 28 21:25:38 2015 Jean-Baptiste Grégoire
 */
 
 #include "window.h"
 
-void		window_handle()
+void		*window_handle(void *p)
 {
   SDL_Event	event;
   char		good;
-
+  int		i;
+  t_philo	**philos;
+  
   good = 1;
+  i = 0;
+  philos = (t_philo **)(p);
   while (good)
     {
       SDL_WaitEvent(&event);
       if (event.type == SDL_QUIT)
-	good = 0;
+	{
+	  while (i < NUMBER_PHILO)
+	    {
+	      (*philos)[i].is_good = 0;
+	      i++;
+	    }
+	  good = 0;
+	}
     }
+  return (NULL);
 }
 
-void		window_display(t_philo *philo)
+void			window_display(t_philo *philo)
 {
-  SDL_Surface	*tmp;
-  SDL_Surface	*screen;
-  SDL_Rect	pos;
-
+  static SDL_Surface	*eat;
+  static SDL_Surface	*sleep;
+  static SDL_Surface	*think;
+  SDL_Surface		*screen;
+  SDL_Rect		pos;
+  
   screen = window_init(1);
-  pos.x = philo->id * 165 - 100;
+  pos.x = philo->id * 180 - 170;
   pos.y = 350;
-  tmp = SDL_CreateRGBSurface(SDL_HWSURFACE, 150, 100, 32, 0, 0, 0, 0);
+  eat = IMG_Load("bonus/img/eat.png");
+  sleep = IMG_Load("bonus/img/sleep.png");
+  think = IMG_Load("bonus/img/think.png");
+  if (!eat || !sleep || !think)
+    {
+      fprintf(stderr, "Error: Can't load image !\n");
+      return ;
+    }
   if (philo->state == SLEEP)
-    SDL_FillRect(tmp, NULL, SDL_MapRGB(screen->format, 255, 255, 255));
+    SDL_BlitSurface(sleep, NULL, screen, &pos);
   else if (philo->state == EAT)
-    SDL_FillRect(tmp, NULL, SDL_MapRGB(screen->format, 0, 255, 0));
+    SDL_BlitSurface(eat, NULL, screen, &pos);
   else
-    SDL_FillRect(tmp, NULL, SDL_MapRGB(screen->format, 0, 0, 255));
-  SDL_BlitSurface(tmp, NULL, screen, &pos);
+    SDL_BlitSurface(think, NULL, screen, &pos);
   SDL_Flip(screen);
 }
 

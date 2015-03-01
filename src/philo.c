@@ -5,7 +5,7 @@
 ** Login   <jibb@epitech.net>
 **
 ** Started on  Wed Feb 25 10:18:39 2015 Jean-Baptiste Grégoire
-** Last update Sat Feb 28 18:09:34 2015 Hugo Prenat
+** Last update Sat Feb 28 22:09:28 2015 Hugo Prenat
 */
 
 #include "window.h"
@@ -30,7 +30,7 @@ void	change_to_sleep(t_philo *philo)
 
 void	change_to_think(t_philo *philo)
 {
-  pthread_mutex_lock(&philo->stick);
+  pthread_mutex_trylock(&philo->stick);
   philo->state = THINK;
   sleep(CYCLE_THINK);
   pthread_mutex_unlock(&philo->stick);
@@ -54,18 +54,15 @@ void			*start_philo(void *philos)
   t_philo		*philo;
 
   philo = (t_philo *)(philos);
-  while (philo->rice > 0)
+  while (philo->rice > 0 && philo->is_good)
     {
-      if (philo->state == THINK || philo->state == SLEEP)
+      if (philo->state == THINK/* || philo->state == SLEEP*/)
 	change_to_eat(philo);
       else if (philo->state == EAT)
 	change_to_sleep(philo);
       else
 	change_to_think(philo);
-      pthread_mutex_lock(&disp);
-      window_display(philo);
-      pthread_mutex_unlock(&disp);
-      /* display(philo); */
+      display(philo);
     }
   return ((void *)(0));
 }
