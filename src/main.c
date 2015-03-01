@@ -5,15 +5,15 @@
 ** Login   <jibb@epitech.net>
 **
 ** Started on  Wed Feb 25 10:18:50 2015 Jean-Baptiste Grégoire
-** Last update Sun Mar  1 21:47:33 2015 Jean-Baptiste Grégoire
+** Last update Sun Mar  1 22:13:46 2015 Hugo Prenat
 */
 
 #include "window.h"
 
-void		init_philo()
+void		init_philo(int nbr_philo)
 {
-  t_philo	philos[NUMBER_PHILO];
-  pthread_t	threads[NUMBER_PHILO + 2];
+  t_philo	philos[nbr_philo];
+  pthread_t	threads[nbr_philo + 2];
   int		i;
   void		*ret;
 
@@ -42,7 +42,10 @@ int		run_philo()
 {
   if (window_init(0) == (void *)(-1))
     return (-1);
-  init_philo();
+  if (NUMBER_PHILO > 6)
+    init_philo(NUMBER_PHILO);
+  else
+    init_philo(7);
   window_destroy();
   return (0);
 }
