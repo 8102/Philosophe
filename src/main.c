@@ -5,7 +5,7 @@
 ** Login   <jibb@epitech.net>
 **
 ** Started on  Wed Feb 25 10:18:50 2015 Jean-Baptiste Grégoire
-** Last update Sun Mar  1 15:41:22 2015 Jean-Baptiste Grégoire
+** Last update Sun Mar  1 18:17:29 2015 Jean-Baptiste Grégoire
 */
 
 #include "window.h"
@@ -24,7 +24,7 @@ void		init_philo()
       philos[i].id = i + 1;
       philos[i].rice = NUMBER_CYCLE;
       pthread_mutex_init(&philos[i].stick, NULL);
-      philos[i].state = SLEEP;
+      philos[i].state = (i == NUMBER_PHILO - 1 ? SLEEP : (i + 2) % 3);
       philos[i].left_philo = &philos[(i == 0 ? NUMBER_PHILO - 1 : i - 1)];
       philos[i].right_philo = &philos[(i == NUMBER_PHILO - 1 ? 0 : i + 1)];
       pthread_create(&threads[i], NULL, &start_philo, &philos[i]);

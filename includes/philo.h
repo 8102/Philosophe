@@ -5,7 +5,7 @@
 ** Login   <jibb@epitech.net>
 **
 ** Started on  Wed Feb 25 10:21:52 2015 Jean-Baptiste Grégoire
-** Last update Sun Mar  1 15:12:15 2015 Jean-Baptiste Grégoire
+** Last update Sun Mar  1 18:05:02 2015 Jean-Baptiste Grégoire
 */
 
 #ifndef PHILOSOPHE_H_
@@ -18,9 +18,10 @@
 # include <unistd.h>
 # include <string.h>
 
-# define NUMBER_PHILO	7 // attention à la modification de cet maccro
+# define NUMBER_PHILO	7
 # define CYCLE_EAT	1
-# define CYCLE_THINK	0.5
+# define CYCLE_THINK	1
+# define CYCLE_SLEEP	1
 # define NUMBER_CYCLE	150
 
 enum	e_state

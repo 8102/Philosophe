@@ -5,7 +5,7 @@
 ## Login   <prenat_h@epitech.eu>
 ##
 ## Started on  Wed Feb 25 10:17:02 2015 Hugo Prenat
-## Last update Sun Mar  1 14:57:27 2015 Jean-Baptiste Grégoire
+## Last update Sun Mar  1 18:28:36 2015 Jean-Baptiste Grégoire
 ##
 
 SRC		=	src/main.c		\
@@ -21,7 +21,7 @@ CC		=	gcc
 
 RM		=	rm -f
 
-DEBUG		=	yes
+DEBUG		=	no
 
 INCLUDE 	=	includes/
 
