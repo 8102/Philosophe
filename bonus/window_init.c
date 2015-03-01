@@ -5,7 +5,7 @@
 ** Login   <jibb@epitech.net>
 **
 ** Started on  Fri Feb 27 17:04:28 2015 Jean-Baptiste Grégoire
-** Last update Sun Mar  1 13:37:58 2015 Jean-Baptiste Grégoire
+** Last update Sun Mar  1 13:53:35 2015 Jean-Baptiste Grégoire
 */
 
 #include "window.h"
@@ -29,10 +29,7 @@ void			*window_handle(void *p)
 	{
 	  pthread_mutex_lock(&m);
 	  while (i < NUMBER_PHILO)
-	    {
-	      philos[i].is_good = 0;
-	      i++;
-	    }
+	    philos[i++].is_good = 0;
 	  pthread_mutex_unlock(&m);
 	  good = 0;
 	}
@@ -61,10 +58,10 @@ void			*window_display(void *p)
       fprintf(stderr, "Error: Can't load image !\n");
       return (NULL);
     }
-  while (1)
+  while (philo[0].is_good)
     {
       i = 0;
-      while (i < NUMBER_PHILO || philo[i].is_good)
+      while (i < NUMBER_PHILO)
 	{
 	  pos.x = philo[i].id * 180 - 170;
 	  if (philo[i].state == SLEEP)
