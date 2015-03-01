@@ -1,11 +1,11 @@
 /*
-m** philo.h for philosophe in /home/jibb/rendu/PSU_2014_philo
+** philo.h for philosophe in /home/jibb/rendu/PSU_2014_philo
 **
 ** Made by Jean-Baptiste Grégoire
 ** Login   <jibb@epitech.net>
 **
 ** Started on  Wed Feb 25 10:21:52 2015 Jean-Baptiste Grégoire
-** Last update Sat Feb 28 18:46:04 2015 Jean-Baptiste Grégoire
+** Last update Sun Mar  1 15:12:15 2015 Jean-Baptiste Grégoire
 */
 
 #ifndef PHILOSOPHE_H_

@@ -5,7 +5,7 @@
 ** Login   <jibb@epitech.net>
 **
 ** Started on  Wed Feb 25 10:18:50 2015 Jean-Baptiste Grégoire
-** Last update Sun Mar  1 12:09:37 2015 Hugo Prenat
+** Last update Sun Mar  1 15:41:22 2015 Jean-Baptiste Grégoire
 */
 
 #include "window.h"
@@ -34,10 +34,7 @@ void		init_philo()
   pthread_create(&threads[i + 2], NULL, &window_handle, (void *)(&philos));
   i = 0;
   while (i < NUMBER_PHILO)
-    {
-      pthread_join(threads[i], &ret);
-      i++;
-    }
+    pthread_join(threads[i++], &ret);
   pthread_join(threads[i + 1], &ret);
 }
 
