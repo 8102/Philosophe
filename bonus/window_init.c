@@ -5,7 +5,7 @@
 ** Login   <jibb@epitech.net>
 **
 ** Started on  Fri Feb 27 17:04:28 2015 Jean-Baptiste Grégoire
-** Last update Sun Mar  1 12:10:33 2015 Hugo Prenat
+** Last update Sun Mar  1 13:37:58 2015 Jean-Baptiste Grégoire
 */
 
 #include "window.h"
@@ -40,7 +40,7 @@ void			*window_handle(void *p)
   return (NULL);
 }
 
-void			window_display(void *p)
+void			*window_display(void *p)
 {
   static SDL_Surface	*eat;
   static SDL_Surface	*sleep_img;
@@ -59,7 +59,7 @@ void			window_display(void *p)
   if (!eat || !sleep_img || !think)
     {
       fprintf(stderr, "Error: Can't load image !\n");
-      return ;
+      return (NULL);
     }
   while (1)
     {
@@ -75,9 +75,9 @@ void			window_display(void *p)
 	    SDL_BlitSurface(think, NULL, screen, &pos);
 	  i++;
 	}
-      return ;
+      SDL_Flip(screen);
     }
-  SDL_Flip(screen);
+  return (NULL);
 }
 
 SDL_Surface		*window_init(int flag)

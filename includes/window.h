@@ -5,7 +5,7 @@
 ** Login   <jibb@epitech.net>
 **
 ** Started on  Fri Feb 27 17:14:11 2015 Jean-Baptiste Grégoire
-** Last update Sat Feb 28 22:21:46 2015 Hugo Prenat
+** Last update Sun Mar  1 13:26:08 2015 Jean-Baptiste Grégoire
 */
 
 #ifndef WINDOW_H_
@@ -20,7 +20,7 @@
 
 void		*window_handle(void *p);
 void		window_destroy();
-void		window_display(void *p);
+void		*window_display(void *p);
 SDL_Surface	*window_init(int flag);
 
 #endif /* WINDOW_H_ */
